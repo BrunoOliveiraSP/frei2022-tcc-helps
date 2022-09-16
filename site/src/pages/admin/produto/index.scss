@@ -1,6 +1,7 @@
 
 .pagina-admin-produto {
     padding: 1.5em;
+    border-top: 8px solid #672dc3;
 
 
     .form {
@@ -20,9 +21,11 @@
         text-align: right;
         margin-right: 1em;
     }
-    // .form > div:last-child {
-    //     align-self: flex-end;
-    // }
+    
+    .gpo-categoria {
+        display: flex;
+        width: 100%;
+    }
 
     .btn-categoria {
         border-radius: 3px;
@@ -31,4 +34,15 @@
     }
 
 
+    @media (max-width: 425px) {
+        .form > div {
+            flex-direction: column;
+            align-items: flex-start;
+            margin: .7em .2em;
+        }
+        .form > div label {
+            min-width: auto;
+        }
+
+    }
 }
