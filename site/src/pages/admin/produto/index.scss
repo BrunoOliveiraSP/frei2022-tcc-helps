@@ -21,6 +21,10 @@
         text-align: right;
         margin-right: 1em;
     }
+    .form > div:last-child {
+        margin-top: 1em;
+        justify-content: center;
+    }
     
     .gpo-categoria {
         display: flex;
