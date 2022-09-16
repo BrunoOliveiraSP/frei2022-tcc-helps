@@ -3,8 +3,32 @@
     padding: 1.5em;
 
 
+    .form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 500px;
+    }
 
+    .form > div {
+        display: flex;
+        align-items: center;
+        margin: .2em;
+    }
+    .form > div label {
+        min-width: 8em;
+        text-align: right;
+        margin-right: 1em;
+    }
+    // .form > div:last-child {
+    //     align-self: flex-end;
+    // }
 
+    .btn-categoria {
+        border-radius: 3px;
+        padding: 10px 14px;
+        margin-left: 6px;
+    }
 
 
 }

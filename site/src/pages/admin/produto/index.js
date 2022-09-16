@@ -27,21 +27,57 @@ export default function Produto() {
 
     return (
         <div className='pagina-admin-produto'>
-            <h1> Produto </h1>
+            <h1> Novo Produto </h1>
 
-            <div>
-                Categoria:
-                <select value={idCategoria} onChange={e => setIdCategoria(e.target.value)}>
-                    {categorias.map(item =>
-                        <option value={item.id}> {item.categoria} </option>
-                    )}
-                </select>
-            </div>
-            <div>
-                Departamento: <select></select>
+            <div className='form'>
+
+                <div>
+                    <label> Produto: </label>
+                    <input type='text' />
+                </div>
+
+                <div>
+                    <label> Preço: </label>
+                    <input type='text' />
+                </div>
+
+                <div>
+                    <label> Destaque: </label>
+                    <input type='checkbox' />
+                </div>
+               
+
+                
+                <div>
+                    <label>Departamento:</label>
+                    <select></select>
+                </div>
+
+                
+
+                <div>
+                    <label>Categoria:</label>
+                    <select
+                        value={idCategoria}
+                        onChange={e => setIdCategoria(e.target.value)}
+                    >
+                        <option selected disabled hidden>Selecione</option>
+
+                        {categorias.map(item =>
+                            <option value={item.id}> {item.categoria} </option>
+                        )}
+                    </select>
+                    <button className='btn-categoria'>+</button>
+                </div>
+
+                
+                
+                <div>
+                    <button onClick={salvar}> Salvar </button>
+                </div>
+
             </div>
 
-            <button onClick={salvar}> Salvar </button>
         </div>
     )
 }

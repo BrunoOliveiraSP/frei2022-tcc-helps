@@ -1,8 +1,45 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
 
 * {
   box-sizing: border-box;
   margin: 0px;
+  font-family: 'Roboto';
 }
 
+h1 {
+  margin-bottom: 1em;
+}
+
+textarea {
+  resize: none;
+}
+
+input, select {
+  outline: none;
+  border: 1px solid rgb(92, 92, 92);
+  user-select: none;
+
+  border-radius: 5px;
+  font-size: 1em;
+  padding: .5em;
+  width: 100%;
+}
+
+input[type=checkbox] {
+  width: auto;
+  align-self: flex-start;
+}
+
+button {
+  outline: none;
+  border: none;
+  background-color: #672dc3;
+  color: #fff;
+  padding: .8em 1.2em;
+  border-radius: 2em;
+
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
