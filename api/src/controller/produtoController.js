@@ -10,8 +10,8 @@ server.post('/admin/produto', async (req, resp) => {
 
         const idProduto = await salvarProduto(produto);
         
-        for (const item of produto.categorias) {
-            await salvarProdutoCategoria(idProduto, item);
+        for (const idCateg of produto.categorias) {
+            await salvarProdutoCategoria(idProduto, idCateg);
         }
 
         

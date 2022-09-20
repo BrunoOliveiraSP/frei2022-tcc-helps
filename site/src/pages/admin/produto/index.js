@@ -100,8 +100,10 @@ export default function Produto() {
                 <div>
                     <label></label>
                     <div className='cat-conteiner'>
-                        {catSelecionadas.map(item =>
-                                <div className='cat-selecionada'> {buscarNomeCategoria(item)} </div>
+                        {catSelecionadas.map(id =>
+                            <div className='cat-selecionada'>
+                                {buscarNomeCategoria(id)}
+                            </div>
                         )}
                     </div>
                     
