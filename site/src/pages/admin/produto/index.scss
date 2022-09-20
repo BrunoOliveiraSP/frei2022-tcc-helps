@@ -37,6 +37,14 @@
         margin-left: 6px;
     }
 
+    .cat-selecionada {
+        background-color: #672dc3;
+        padding: .5em 1em;
+        margin: 0em 5px;
+        color: #fff;
+        border-radius: 1em;
+    }
+
 
     @media (max-width: 425px) {
         .form > div {

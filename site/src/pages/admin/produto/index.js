@@ -11,9 +11,22 @@ export default function Produto() {
     const [idDepartamento, setIdDepartamento] = useState();
     const [departamentos, setDepartamentos] = useState([]);
 
+    const [catSelecionadas, setCatSelecionadas] = useState([]);
+
 
     function salvar() {
         alert('Categoria: ' + idCategoria + ', Departamento: ' + idDepartamento);
+    }
+
+
+    function buscarNomeCategoria(id) {
+        const cat = categorias.find(item => item.id == id);
+        return cat.categoria;
+    }
+
+    function adicionarCategoria() {
+        const categorias = [...catSelecionadas, idCategoria];
+        setCatSelecionadas(categorias);
     }
 
 
@@ -81,8 +94,14 @@ export default function Produto() {
                                 <option value={item.id}> {item.categoria} </option>
                             )}
                         </select>
-                        <button className='btn-categoria'>+</button>
+                        <button onClick={adicionarCategoria} className='btn-categoria'>+</button>                        
                     </div>
+                </div>
+                <div>
+                    <label></label>
+                    {catSelecionadas.map(item =>
+                            <span className='cat-selecionada'> {buscarNomeCategoria(item)} </span>    
+                    )}
                 </div>
 
 
