@@ -9,10 +9,12 @@ server.post('/admin/produto', async (req, resp) => {
         const produto = req.body;
 
         const idProduto = await salvarProduto(produto);
+        
         for (const item of produto.categorias) {
             await salvarProdutoCategoria(idProduto, item);
         }
 
+        
         resp.status(204).send();
     }
     catch (err) {

@@ -99,9 +99,12 @@ export default function Produto() {
                 </div>
                 <div>
                     <label></label>
-                    {catSelecionadas.map(item =>
-                            <span className='cat-selecionada'> {buscarNomeCategoria(item)} </span>    
-                    )}
+                    <div className='cat-conteiner'>
+                        {catSelecionadas.map(item =>
+                                <div className='cat-selecionada'> {buscarNomeCategoria(item)} </div>
+                        )}
+                    </div>
+                    
                 </div>
 
 
