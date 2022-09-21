@@ -12,7 +12,7 @@ server.post('/admin/produto', async (req, resp) => {
     try {
         const produto = req.body;
 
-        validarProduto(produto);
+        await validarProduto(produto);
 
         const idProduto = await salvarProduto(produto);
         
