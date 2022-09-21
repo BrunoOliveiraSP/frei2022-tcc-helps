@@ -1,10 +1,18 @@
 import './index.scss'
 
+import { toast } from 'react-toastify';
+
+
 import { listarCategorias } from '../../../api/categoriaAPI'
 import { listarDepartamentos } from '../../../api/departamentoAPI'
 import { useEffect, useState } from 'react'
+import { salvarProduto } from '../../../api/produtoAPI';
 
 export default function Produto() {
+    const [nome, setNome] = useState('');
+    const [preco, setPreco] = useState('');
+    const [destaque, setDestaque] = useState(false);
+
     const [idCategoria, setIdCategoria] = useState();
     const [categorias, setCategorias] = useState([]);
 
@@ -14,8 +22,16 @@ export default function Produto() {
     const [catSelecionadas, setCatSelecionadas] = useState([]);
 
 
-    function salvar() {
-        alert('Categoria: ' + idCategoria + ', Departamento: ' + idDepartamento);
+    async function salvar() {
+        try {
+            const prevoProduto = Number(preco.replace(',', '.'));
+
+            const r = await salvarProduto(nome, prevoProduto, destaque, idDepartamento, catSelecionadas);
+            toast.dark('Produto cadastrado com sucesso');
+        }
+        catch (err) {
+            toast.error(err.response.data.erro);
+        }
     }
 
 
@@ -24,9 +40,12 @@ export default function Produto() {
         return cat.categoria;
     }
 
+    
     function adicionarCategoria() {
-        const categorias = [...catSelecionadas, idCategoria];
-        setCatSelecionadas(categorias);
+        if (!catSelecionadas.find(item => item == idCategoria)) {
+            const categorias = [...catSelecionadas, idCategoria];
+            setCatSelecionadas(categorias);
+        }
     }
 
 
@@ -56,17 +75,17 @@ export default function Produto() {
 
                 <div>
                     <label> Produto: </label>
-                    <input type='text' />
+                    <input type='text' value={nome} onChange={e => setNome(e.target.value)} />
                 </div>
 
                 <div>
                     <label> Preço: </label>
-                    <input type='text' />
+                    <input type='text' value={preco} onChange={e => setPreco(e.target.value)} />
                 </div>
 
                 <div>
                     <label> Destaque: </label>
-                    <input type='checkbox' />
+                    <input type='checkbox' checked={destaque} onChange={e => setDestaque(e.target.checked)} />
                 </div>
 
 
