@@ -51,6 +51,30 @@
         border-radius: 1em;
     }
 
+    .form-container {
+        display: flex;
+    }
+
+    .image-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 400px;
+        margin-left: 30px;
+    }
+    .image-container img {
+        margin:5px;
+        width: 150px;
+        cursor: pointer;
+    }
+    .image-container input[type=file] {
+        visibility: hidden;
+    }
+
+    button {
+        cursor: pointer;
+    }
+
 
     @media (max-width: 425px) {
         .form > div {

@@ -1,10 +1,13 @@
+import multer from 'multer'
 import { Router } from 'express';
 
-import { salvarProduto, salvarProdutoCategoria } from '../repository/produtoRepository.js';
+import { salvarProduto, salvarProdutoCategoria, salvarProdutoImagem } from '../repository/produtoRepository.js';
 import { buscarCategoriaPorId } from '../repository/categoriaRepository.js';
 import { validarProduto } from '../service/produtoValidacao.js';
 
+
 const server = Router();
+const upload = multer({ dest: 'storage/produto' })
 
 
 
@@ -23,7 +26,10 @@ server.post('/admin/produto', async (req, resp) => {
                 await salvarProdutoCategoria(idProduto, idCateg);
         }
 
-        resp.status(204).send();
+        resp.send({
+            id: idProduto
+        });
+
     }
     catch (err) {
         return resp.status(400).send({
@@ -31,6 +37,31 @@ server.post('/admin/produto', async (req, resp) => {
         })
     }
 })
+
+
+
+
+server.put('/admin/produto/:id', upload.array('imagens'), async (req, resp) => {
+    try {
+        const id = req.params.id;
+        const imagens = req.files;
+
+        console.log(id);
+        console.log(imagens);
+
+        for (const imagem of imagens) {
+            await salvarProdutoImagem(id, imagem.path);
+        }
+
+        resp.status(204).send();
+    }
+    catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
 
 
 

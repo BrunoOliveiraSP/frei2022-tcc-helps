@@ -1,0 +1,69 @@
+
+.pagina-admin-consultar-produto {
+    padding: 1.5em;
+    border-top: 8px solid #672dc3;
+
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 1024px;
+        overflow-x: auto;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    th {
+        background-color: #672dc3;
+        color: #fff;
+        padding: 10px 15px;
+        text-align: left;
+    }
+    td {
+        padding: 10px 15px;
+    }
+
+    tr:nth-child(odd) td {
+        background-color: #fff;
+    }
+    tr:nth-child(even) td {
+        background-color: #f1f1f1;
+    }
+
+    
+    tr td:nth-last-child(1), tr td:nth-last-child(2) {
+        padding: 0px;
+        text-align: center;
+    }
+    tr td:nth-last-child(1) span, tr td:nth-last-child(2) span {
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 10px;
+        cursor: pointer;
+        transition: .6s;
+        padding: 5px 10px;
+        border-radius: 3px;
+    }
+    tr td:nth-last-child(1) span:hover, tr td:nth-last-child(2) span:hover {
+        background-color: #000;
+        color: #fff;
+    }
+
+    
+    
+
+    @media (max-width: 425px) {
+        .form > div {
+            flex-direction: column;
+            align-items: flex-start;
+            margin: .7em .2em;
+        }
+        .form > div label {
+            min-width: auto;
+        }
+
+    }
+}

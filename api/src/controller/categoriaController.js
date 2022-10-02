@@ -5,6 +5,7 @@ import { Router } from "express";
 const server = Router();
 
 
+
 server.get('/api/categoria', async (req, resp) => {
     try {
         const linhas = await listarCategorias();

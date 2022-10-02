@@ -30,6 +30,15 @@ create table tb_produto_categoria (
 );
 
 
+create table tb_produto_imagem (
+	id_produto_imagem	    int primary key auto_increment,
+    id_produto				int,
+    ds_imagem   			varchar(800),
+    foreign key (id_produto) references tb_produto (id_produto)
+);
+
+
+
 select * from tb_categoria;
 
 select * from tb_departamento;

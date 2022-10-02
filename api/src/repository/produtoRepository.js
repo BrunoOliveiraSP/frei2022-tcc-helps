@@ -28,3 +28,15 @@ export async function salvarProdutoCategoria(idProduto, idCategoria) {
 
     const [resp] = await con.query(comando, [idCategoria, idProduto])
 }
+
+
+
+
+export async function salvarProdutoImagem(idProduto, imagemPath) {
+    const comando = `
+        insert into tb_produto_imagem (id_produto, ds_imagem)
+                                  values (?, ?)
+    `
+
+    const [resp] = await con.query(comando, [idProduto, imagemPath])
+}
