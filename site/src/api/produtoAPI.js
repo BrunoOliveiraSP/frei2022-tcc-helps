@@ -12,6 +12,13 @@ export async function salvarProduto(nome, preco, destaque, idDepartamento, categ
 }
 
 
+
+export async function buscarProdutos() {
+    const r = await api.get('/admin/produto');
+    return r.data;
+}
+
+
 export async function salvarImagens(id, imagem1, imagem2, imagem3, imagem4) {
     
     let form = new FormData();

@@ -1,7 +1,20 @@
 import './index.scss'
 
+import { useEffect, useState} from 'react'
+import { buscarProdutos } from '../../../api/produtoAPI';
 
 export default function ConsultarProduto() {
+    const [produtos, setProdutos] = useState([]);
+
+    async function carregarProdutos() {
+        const r = await buscarProdutos();
+        setProdutos(r);
+    }
+
+
+    useEffect(() => {
+        carregarProdutos();
+    }, []);
 
 
     return (
@@ -24,47 +37,18 @@ export default function ConsultarProduto() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>01</td>
-                            <td>Livro</td>
-                            <td>R$ 5,00</td>
-                            <td>Sim</td>
-                            <td>Fantasia</td>
-                            <td>03</td>
-                            <td><span>Editar</span></td>
-                            <td><span>Remover</span></td>
-                        </tr>
-                        <tr>
-                            <td>02</td>
-                            <td>Livro</td>
-                            <td>R$ 5,00</td>
-                            <td>Sim</td>
-                            <td>Fantasia</td>
-                            <td>03</td>
-                            <td><span>Editar</span></td>
-                            <td><span>Remover</span></td>
-                        </tr>
-                        <tr>
-                            <td>02</td>
-                            <td>Livro</td>
-                            <td>R$ 5,00</td>
-                            <td>Sim</td>
-                            <td>Fantasia</td>
-                            <td>03</td>
-                            <td><span>Editar</span></td>
-                            <td><span>Remover</span></td>
-                        </tr>
-                        <tr>
-                            <td>02</td>
-                            <td>Livro</td>
-                            <td>R$ 5,00</td>
-                            <td>Sim</td>
-                            <td>Fantasia</td>
-                            <td>03</td>
-                            <td><span>Editar</span></td>
-                            <td><span>Remover</span></td>
-                        </tr>
-
+                        {produtos.map(item =>
+                            <tr>
+                                <td> {item.id} </td>
+                                <td> {item.produto} </td>
+                                <td>R$ {item.preco}</td>
+                                <td> {item.destaque ? 'Sim' : 'Não'} </td>
+                                <td> {item.departamento} </td>
+                                <td> {item.qtdCategorias} </td>
+                                <td><span>Editar</span></td>
+                                <td><span>Remover</span></td>
+                            </tr>    
+                        )}
                     </tbody>
                 </table>
 

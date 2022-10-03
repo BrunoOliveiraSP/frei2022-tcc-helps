@@ -1,7 +1,7 @@
 import multer from 'multer'
 import { Router } from 'express';
 
-import { salvarProduto, salvarProdutoCategoria, salvarProdutoImagem } from '../repository/produtoRepository.js';
+import { buscarProdutos, salvarProduto, salvarProdutoCategoria, salvarProdutoImagem } from '../repository/produtoRepository.js';
 import { buscarCategoriaPorId } from '../repository/categoriaRepository.js';
 import { validarProduto } from '../service/produtoValidacao.js';
 
@@ -62,6 +62,19 @@ server.put('/admin/produto/:id', upload.array('imagens'), async (req, resp) => {
     }
 })
 
+
+
+server.get('/admin/produto', async (req, resp) => {
+    try {
+        const r = await buscarProdutos();
+        resp.send(r);
+    }
+    catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
 
 
 

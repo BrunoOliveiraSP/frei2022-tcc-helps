@@ -40,3 +40,30 @@ export async function salvarProdutoImagem(idProduto, imagemPath) {
 
     const [resp] = await con.query(comando, [idProduto, imagemPath])
 }
+
+
+export async function buscarProdutos() {
+    const comando = `
+        select tb_produto.id_produto        as id,
+            nm_produto                      as produto,
+            vl_preco                        as preco,
+            bt_destaque                     as destaque,
+            nm_departamento                 as departamento,
+            count(nm_categoria)             as qtdCategorias
+        from tb_produto 
+        inner join tb_departamento on tb_produto.id_departamento = tb_departamento.id_departamento
+        inner join tb_produto_categoria on tb_produto_categoria.id_produto = tb_produto.id_produto
+        inner join tb_categoria on tb_categoria.id_categoria = tb_produto_categoria.id_categoria
+        group 
+            by tb_produto.id_produto,
+                nm_produto,
+                vl_preco,
+                bt_destaque,
+                nm_departamento
+        `
+
+    const [registros] = await con.query(comando);
+    return registros;
+}
+
+
