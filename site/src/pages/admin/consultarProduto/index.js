@@ -1,14 +1,35 @@
 import './index.scss'
+import { toast } from 'react-toastify';
 
 import { useEffect, useState} from 'react'
-import { buscarProdutos } from '../../../api/produtoAPI';
+import { buscarProdutos, removerProduto } from '../../../api/produtoAPI';
+import { useNavigate } from 'react-router-dom';
 
 export default function ConsultarProduto() {
     const [produtos, setProdutos] = useState([]);
 
+
+    const navigate = useNavigate();
+
+
     async function carregarProdutos() {
         const r = await buscarProdutos();
         setProdutos(r);
+    }
+
+    async function deletarProduto(id) {
+        try {
+            await removerProduto(id);
+            await carregarProdutos();
+            toast.dark('Produto removido com sucesso');
+        }
+        catch (err) {
+            toast.error(err.response.data.erro);
+        }
+    }
+
+    function editar(id) {
+        navigate(`/admin/produto/${id}`)
     }
 
 
@@ -45,8 +66,8 @@ export default function ConsultarProduto() {
                                 <td> {item.destaque ? 'Sim' : 'Não'} </td>
                                 <td> {item.departamento} </td>
                                 <td> {item.qtdCategorias} </td>
-                                <td><span>Editar</span></td>
-                                <td><span>Remover</span></td>
+                                <td><span onClick={() => editar(item.id)}>Editar</span></td>
+                                <td><span onClick={() => deletarProduto(item.id)}>Remover</span></td>
                             </tr>    
                         )}
                     </tbody>

@@ -10,7 +10,6 @@ async function createCon() {
         database: process.env.MYSQL_DB,
         timezone: '+00:00',
         typeCast: function (field, next) {
-            console.log(field.type);
             if (field.type === 'TINY' && field.length === 1) {
                 return (field.string() === '1');
             }

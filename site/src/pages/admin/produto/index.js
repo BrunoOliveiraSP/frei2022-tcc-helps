@@ -6,9 +6,13 @@ import { toast } from 'react-toastify';
 import { listarCategorias } from '../../../api/categoriaAPI'
 import { listarDepartamentos } from '../../../api/departamentoAPI'
 import { useEffect, useState } from 'react'
-import { salvarImagens, salvarProduto } from '../../../api/produtoAPI';
+import { alterarProduto, buscarProdutoPorId, salvarImagens, salvarProduto } from '../../../api/produtoAPI';
+import { useParams } from 'react-router-dom';
+import { API_URL } from '../../../api/config';
 
 export default function Produto() {
+    const [idProduto, setIdProduto] = useState();
+    
     const [nome, setNome] = useState('');
     const [preco, setPreco] = useState('');
     const [destaque, setDestaque] = useState(false);
@@ -28,14 +32,27 @@ export default function Produto() {
     const [catSelecionadas, setCatSelecionadas] = useState([]);
 
 
+    const { id } = useParams();
+
+
     async function salvar() {
         try {
             const prevoProduto = Number(preco.replace(',', '.'));
 
-            const r = await salvarProduto(nome, prevoProduto, destaque, idDepartamento, catSelecionadas);
-            await salvarImagens(r.id, imagem1, imagem2, imagem3, imagem4);
+            if (!id) {
+                const r = await salvarProduto(nome, prevoProduto, destaque, idDepartamento, catSelecionadas);
+                await salvarImagens(r.id, imagem1, imagem2, imagem3, imagem4);
+    
+                toast.dark('Produto cadastrado com sucesso');
+            }
+            else {
+                await alterarProduto(id, nome, prevoProduto, destaque, idDepartamento, catSelecionadas);
+                await salvarImagens(id, imagem1, imagem2, imagem3, imagem4);
+    
+                toast.dark('Produto alterado com sucesso');
+            }
 
-            toast.dark('Produto cadastrado com sucesso');
+            
         }
         catch (err) {
             toast.error(err.response.data.erro);
@@ -46,6 +63,11 @@ export default function Produto() {
     function buscarNomeCategoria(id) {
         const cat = categorias.find(item => item.id == id);
         return cat.categoria;
+    }
+
+    function removerCategoria(id) {
+        const x = catSelecionadas.filter(item => item != id);
+        setCatSelecionadas(x);
     }
 
 
@@ -70,6 +92,34 @@ export default function Produto() {
         setCategorias(r);
     }
 
+    async function carregarProduto() {
+        if (!id) return;
+
+        const r = await buscarProdutoPorId(id);
+        setIdProduto(r.info.id);
+        setNome(r.info.produto);
+        setPreco(r.info.preco.toString());
+        setDestaque(r.info.destaque);
+        setIdDepartamento(r.info.departamento);
+        setCatSelecionadas(r.categorias);
+
+        if (r.imagens.length > 0) {
+            setImagem1(r.imagens[0]);
+        }
+
+        if (r.imagens.length > 1) {
+            setImagem2(r.imagens[1]);
+        }
+
+        if (r.imagens.length > 2) {
+            setImagem3(r.imagens[2]);
+        }
+
+        if (r.imagens.length > 3) {
+            setImagem4(r.imagens[3]);
+        }
+    }
+
 
     function escolherImagem(inputId) {
         document.getElementById(inputId).click();
@@ -78,6 +128,9 @@ export default function Produto() {
     function exibirImagem(imagem) {
         if (imagem == undefined) {
             return '/image.svg';
+        }
+        else if (typeof (imagem) == 'string') {
+            return `${API_URL}/${imagem}`
         }
         else {
             return URL.createObjectURL(imagem);
@@ -89,12 +142,13 @@ export default function Produto() {
     useEffect(() => {
         carregarCategorias();
         carregarDepartamentos();
+        carregarProduto();
     }, [])
 
 
     return (
         <div className='pagina-admin-produto'>
-            <h1> Novo Produto </h1>
+            <h1> {id ? 'Alterar Produto' : 'Novo Produto'} </h1>
 
             <div className='form-container'>
 
@@ -147,7 +201,7 @@ export default function Produto() {
                         <label></label>
                         <div className='cat-conteiner'>
                             {catSelecionadas.map(id =>
-                                <div className='cat-selecionada'>
+                                <div className='cat-selecionada' onClick={() => removerCategoria(id)}>
                                     {buscarNomeCategoria(id)}
                                 </div>
                             )}
@@ -166,11 +220,26 @@ export default function Produto() {
 
 
                 <div className='image-container'>
-                    <img src={exibirImagem(imagem1)} alt="" onClick={() => escolherImagem('imagem1')} />
-                    <img src={exibirImagem(imagem2)} alt="" onClick={() => escolherImagem('imagem2')} />
-                    <img src={exibirImagem(imagem3)} alt="" onClick={() => escolherImagem('imagem3')} />
-                    <img src={exibirImagem(imagem4)} alt="" onClick={() => escolherImagem('imagem4')} />
+                    
+                    <div>
+                        <img src={exibirImagem(imagem1)} alt="" onClick={() => escolherImagem('imagem1')} />
+                        {imagem1 ? <span onClick={() => setImagem1()}>Remover</span> : ''}
+                    </div>
+                    <div>
+                        <img src={exibirImagem(imagem2)} alt="" onClick={() => escolherImagem('imagem2')} />
+                        {imagem2 ? <span onClick={() => setImagem2()}>Remover</span> : ''}
+                    </div>
+                    <div>
+                        <img src={exibirImagem(imagem3)} alt="" onClick={() => escolherImagem('imagem3')} />
+                        {imagem3 ? <span onClick={() => setImagem3()}>Remover</span> : ''}
+                    </div>
+                    <div>
+                        <img src={exibirImagem(imagem4)} alt="" onClick={() => escolherImagem('imagem4')} />
+                        {imagem4 ? <span onClick={() => setImagem4()}>Remover</span> : ''}
+                    </div>
+                    
 
+                    
                     <input type='file' id='imagem1' onChange={e => setImagem1(e.target.files[0])} />
                     <input type='file' id='imagem2' onChange={e => setImagem2(e.target.files[0])} />
                     <input type='file' id='imagem3' onChange={e => setImagem3(e.target.files[0])} />

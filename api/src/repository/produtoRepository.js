@@ -20,6 +20,28 @@ export async function salvarProduto(produto) {
 
 
 
+export async function alterarProduto(id, produto) {
+    const comando = `
+        update tb_produto 
+           set id_departamento = ?, 
+               nm_produto = ?, 
+               vl_preco = ?, 
+               bt_destaque = ?
+         where id_produto = ?
+    `
+
+    const [resp] = await con.query(comando, [
+                            produto.idDepartamento,
+                            produto.nome,
+                            produto.preco,
+                            produto.destaque,
+                            id
+                        ])
+    return resp.affectedRows;
+}
+
+
+
 export async function salvarProdutoCategoria(idProduto, idCategoria) {
     const comando = `
         insert into tb_produto_categoria (id_categoria, id_produto)
@@ -28,6 +50,8 @@ export async function salvarProdutoCategoria(idProduto, idCategoria) {
 
     const [resp] = await con.query(comando, [idCategoria, idProduto])
 }
+
+
 
 
 
@@ -67,3 +91,96 @@ export async function buscarProdutos() {
 }
 
 
+
+export async function buscarProdutoPorId(id) {
+    const comando = `
+         select id_produto                      as id,
+                nm_produto                      as produto,
+                vl_preco                        as preco,
+                bt_destaque                     as destaque,
+                id_departamento                 as departamento
+        from tb_produto 
+       where id_produto = ?
+        `
+
+    const [registros] = await con.query(comando, [id]);
+    return registros[0];
+}
+
+
+export async function buscarProdutoCategorias(idProduto) {
+    const comando = `
+         select id_categoria   as id
+           from tb_produto_categoria 
+          where id_produto = ?
+        `
+
+    const [registros] = await con.query(comando, [idProduto]);
+    return registros.map(item => item.id);
+}
+
+
+
+export async function buscarProdutoImagens(idProduto) {
+    const comando = `
+          select ds_imagem   as imagem
+            from tb_produto_imagem 
+           where id_produto = ?
+        `
+
+    const [registros] = await con.query(comando, [idProduto]);
+    return registros.map(item => item.imagem);
+}
+
+
+
+
+
+
+export async function removerProdutoCategorias(idProduto) {
+    const comando = `
+        delete from tb_produto_categoria 
+              where id_produto = ?
+    `
+
+    const [resp] = await con.query(comando, [idProduto])
+    return resp.affectedRows;
+}
+
+
+
+export async function removerProdutoImagens(idProduto) {
+    const comando = `
+        delete from tb_produto_imagem 
+              where id_produto = ?
+    `
+
+    const [resp] = await con.query(comando, [idProduto])
+    return resp.affectedRows;
+}
+
+
+
+
+export async function removerProduto(idProduto) {
+    const comando = `
+        delete from tb_produto 
+              where id_produto = ?
+    `
+
+    const [resp] = await con.query(comando, [idProduto])
+    return resp.affectedRows;
+}
+
+
+
+
+export async function removerProdutoImagensDiferentesDe(imagens) {
+    const comando = `
+        delete from tb_produto_imagem 
+              where ds_imagem NOT IN (?)
+    `
+
+    const [resp] = await con.query(comando, [imagens])
+    return resp.affectedRows;
+}

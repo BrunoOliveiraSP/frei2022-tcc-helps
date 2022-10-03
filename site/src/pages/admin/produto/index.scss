@@ -70,6 +70,16 @@
     .image-container input[type=file] {
         visibility: hidden;
     }
+    .image-container > div {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        font-size: 10px;
+        text-transform: uppercase;
+    }
+    .image-container > div span {
+        cursor: pointer;
+    }
 
     button {
         cursor: pointer;

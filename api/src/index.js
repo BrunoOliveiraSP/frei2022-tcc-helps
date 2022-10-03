@@ -16,7 +16,8 @@ server.use(express.json());
 server.use(categoriaController);
 server.use(departamentoController);
 server.use(produtoController);
- 
+
+server.use('/storage/produto', express.static('storage/produto'));
 
 
 const PORT = process.env.PORT;
