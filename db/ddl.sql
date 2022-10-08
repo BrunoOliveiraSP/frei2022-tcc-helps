@@ -39,11 +39,27 @@ create table tb_produto_imagem (
 
 
 
-select * from tb_categoria;
-
-select * from tb_departamento;
 
 
+create table tb_usuario (
+	id_usuario			int primary key auto_increment,
+    nm_usuario			varchar(200),
+    dt_nascimento		date,
+    ds_telefone			varchar(200),
+    ds_cpf				varchar(200),
+    ds_genero			varchar(200)
+);
+
+create table tb_login_usuario (
+	id_login_usuario	    int primary key auto_increment,
+    id_usuario				int,
+    ds_email	  			varchar(800),
+    ds_senha	  			varchar(800),
+    bt_trocar				boolean,
+    cod_reset				varchar(20),
+    dt_expiracao_cod		datetime,
+    foreign key (id_usuario) references tb_usuario (id_usuario)
+);
 
 
 

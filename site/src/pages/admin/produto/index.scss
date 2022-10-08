@@ -3,28 +3,6 @@
     padding: 1.5em;
     border-top: 8px solid #672dc3;
 
-
-    .form {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        max-width: 500px;
-    }
-
-    .form > div {
-        display: flex;
-        align-items: center;
-        margin: .2em;
-    }
-    .form > div label {
-        min-width: 8em;
-        text-align: right;
-        margin-right: 1em;
-    }
-    .form > div:last-child {
-        margin-top: 1em;
-        justify-content: center;
-    }
     
     .gpo-categoria {
         display: flex;
@@ -51,9 +29,6 @@
         border-radius: 1em;
     }
 
-    .form-container {
-        display: flex;
-    }
 
     .image-container {
         display: flex;
@@ -86,15 +61,5 @@
     }
 
 
-    @media (max-width: 425px) {
-        .form > div {
-            flex-direction: column;
-            align-items: flex-start;
-            margin: .7em .2em;
-        }
-        .form > div label {
-            min-width: auto;
-        }
-
-    }
+ 
 }

@@ -7,6 +7,7 @@ import Login from './pages/admin/login'
 import Produto from './pages/admin/produto'
 import ConsultarProduto from './pages/admin/consultarProduto'
 
+import LoginCli from './pages/login'
 
 
 export default function AppRoutes() {
@@ -14,6 +15,8 @@ export default function AppRoutes() {
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<Home />} />
+                <Route path='/login' element={<LoginCli />} />
+                
                 <Route path='/admin' element={<AdminHome />} />
                 <Route path='/admin/login' element={<Login />} />
                 <Route path='/admin/produto' element={<Produto />} />
