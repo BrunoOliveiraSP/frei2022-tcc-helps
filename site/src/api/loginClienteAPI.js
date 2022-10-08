@@ -7,7 +7,7 @@ const api = axios.create({
 
 
 export async function logar(email, senha) {
-    const r = await api.post('/login', { email, senha });
+    const r = await api.post('/api/login', { email, senha });
     return r.data;
 }
 

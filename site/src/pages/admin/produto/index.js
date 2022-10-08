@@ -3,10 +3,10 @@ import './index.scss'
 import { toast } from 'react-toastify';
 
 
-import { listarCategorias } from '../../../api/categoriaAPI'
-import { listarDepartamentos } from '../../../api/departamentoAPI'
+import { listarCategorias } from '../../../api/admin/categoriaAPI'
+import { listarDepartamentos } from '../../../api/admin/departamentoAPI'
 import { useEffect, useState } from 'react'
-import { alterarProduto, buscarProdutoPorId, salvarImagens, salvarProduto } from '../../../api/produtoAPI';
+import { alterarProduto, buscarProdutoPorId, salvarImagens, salvarProduto } from '../../../api/admin/produtoAPI';
 import { useParams } from 'react-router-dom';
 import { API_URL } from '../../../api/config';
 

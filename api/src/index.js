@@ -1,9 +1,12 @@
 import 'dotenv/config'
 
-import categoriaController from './controller/categoriaController.js';
-import departamentoController from './controller/departamentoController.js'
-import produtoController from './controller/produtoController.js'
+import adminCategoriaController from './controller/admin/categoriaController.js';
+import adminDepartamentoController from './controller/admin/departamentoController.js'
+import adminProdutoController from './controller/admin/produtoController.js'
+
 import loginClienteController from './controller/loginClienteController.js'
+import produtoController from './controller/produtoController.js'
+
 
 import express from "express";
 import cors from "cors";
@@ -14,10 +17,13 @@ server.use(express.json());
 
 
 
-server.use(categoriaController);
-server.use(departamentoController);
-server.use(produtoController);
+server.use(adminCategoriaController);
+server.use(adminDepartamentoController);
+server.use(adminProdutoController);
+
 server.use(loginClienteController);
+server.use(produtoController);
+
 
 server.use('/storage/produto', express.static('storage/produto'));
 

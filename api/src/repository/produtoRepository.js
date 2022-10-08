@@ -184,3 +184,25 @@ export async function removerProdutoImagensDiferentesDe(imagens) {
     const [resp] = await con.query(comando, [imagens])
     return resp.affectedRows;
 }
+
+
+export async function listarProdutosInicio() {
+    const comando = `
+        select tb_produto.id_produto		id,
+               nm_produto					produto,
+               vl_preco						preco,
+               nm_departamento				departamento,
+               min(ds_imagem)				imagem
+          from tb_produto
+    inner join tb_departamento on tb_produto.id_departamento = tb_departamento.id_departamento
+     left join tb_produto_imagem on tb_produto_imagem.id_produto = tb_produto.id_produto
+         group 
+            by tb_produto.id_produto,
+               nm_produto,
+               vl_preco,
+               nm_departamento
+    `
+
+    const [registros] = await con.query(comando);
+    return registros;
+}

@@ -2,7 +2,7 @@ import './index.scss'
 import { toast } from 'react-toastify';
 
 import { useEffect, useState} from 'react'
-import { buscarProdutos, removerProduto } from '../../../api/produtoAPI';
+import { buscarProdutos, removerProduto } from '../../../api/admin/produtoAPI';
 import { useNavigate } from 'react-router-dom';
 
 export default function ConsultarProduto() {

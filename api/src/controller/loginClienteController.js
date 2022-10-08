@@ -4,7 +4,7 @@ import { Router } from "express";
 const server = Router();
 
 
-server.post('/login', async (req, resp) => {
+server.post('/api/login', async (req, resp) => {
     try {
         const { email, senha } = req.body;
 

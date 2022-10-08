@@ -1,13 +1,14 @@
-import { listarDepartamentos } from "../repository/departamentoRepository.js";
+import { listarCategorias } from "../../repository/categoriaRepository.js";
 
 
 import { Router } from "express";
 const server = Router();
 
 
-server.get('/api/departamento', async (req, resp) => {
+
+server.get('/admin/categoria', async (req, resp) => {
     try {
-        const linhas = await listarDepartamentos();
+        const linhas = await listarCategorias();
         resp.send(linhas);
     }
     catch (err) {

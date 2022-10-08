@@ -1,7 +1,7 @@
 import './index.scss'
 
 import { useState } from 'react'
-import { logar } from '../../api/loginCliente';
+import { logar } from '../../api/loginClienteAPI';
 import { toast } from 'react-toastify';
 
 import Storage from 'local-storage'
