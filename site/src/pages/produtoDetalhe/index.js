@@ -14,7 +14,6 @@ export default function ProdutoDetalhe() {
 
     async function carregarPagina() {
         const r = await buscarProdutoPorId(id);
-        console.log(r);
         setProduto(r);
     }
 
