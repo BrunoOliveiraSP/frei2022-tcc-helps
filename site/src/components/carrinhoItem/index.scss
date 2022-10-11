@@ -1,0 +1,134 @@
+.comp-carrinho-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    height: 200px;
+    margin: 10px 0em;
+    padding: 1.5em 3.5em 1.5em 2.5em;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px 2px #e0e0e0;
+
+    .produto-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        max-width: 1024px;
+        width: 100%;
+    }
+
+    .produto-box {
+        display: flex;
+        align-items: center;
+    }
+
+    .imagens {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-right: 50px;
+
+        .atual img {
+            width: 100%;
+            max-width: 200px;
+            min-width: 100px;
+            max-height: 140px;
+        }
+    }
+
+    .qtd-box {
+        display: flex;
+        flex-grow: 1;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    .qtd {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        label {
+            font-weight: 500;
+        }
+    }
+
+    .subtotal div:nth-child(1) {
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .excluir {
+        font-size: 14px;
+        text-transform: uppercase;
+        font-weight: 700;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .detalhes {
+
+        .nome {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .departamento {
+            font-size: 14px;
+        }
+
+        .preco-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-top: 20px;
+        }
+
+        .preco {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+    }
+
+
+
+    @media (max-width: 868px) {
+
+        height: auto;
+
+        .produto-container {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .qtd-box {
+            margin-top: 50px;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 400px;
+        }
+    }
+
+
+    @media (max-width: 415px) {
+        padding: 1.5em;
+        margin: 20px 0px;
+
+        .produto-box {
+            flex-direction: column;
+            align-items: flex-start;
+
+            .imagens {
+                margin: 0px;
+                margin-bottom: 20px;
+            }
+        }
+
+    }
+
+
+
+
+}

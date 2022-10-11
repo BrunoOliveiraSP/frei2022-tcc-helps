@@ -1,8 +1,60 @@
 import './index.scss'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import Storage from 'local-storage'
+import { buscarProdutoPorId } from '../../api/produtoAPI';
+import CarrinhoItem from '../../components/carrinhoItem';
 
 export default function Carrinho() {
+    const [itens, setItens] = useState([]);
+
+
+
+    function qtdItens() {
+        return itens.length;
+    }
+
+    function calcularValorTotal() {
+        let total = 0;
+        for (let item of itens) {
+            total = total + item.produto.info.preco * item.qtd;
+        }
+        return total;
+    }
+
+
+    function removerItem(id) {
+        let carrinho = Storage('carrinho');
+        carrinho = carrinho.filter(item => item.id != id);
+
+        Storage('carrinho', carrinho);
+        carregarCarrinho();
+    }
+
+
+    async function carregarCarrinho() {
+        let carrinho = Storage('carrinho');
+        if (carrinho) {
+
+            let temp = [];
+            
+            for (let produto of carrinho) {
+                let p = await buscarProdutoPorId(produto.id);
+                
+                temp.push({
+                    produto: p,
+                    qtd: produto.qtd
+                })
+            }
+
+            setItens(temp);
+        }
+
+    }
+
+    useEffect(() => {
+        carregarCarrinho();
+    }, [])
 
 
     return (
@@ -14,51 +66,20 @@ export default function Carrinho() {
 
                 <div className='itens'>
 
-                    <div className='produto'>
-                        <div className='produto-container'>
-                            <div className='produto-box'>
-                                <div className='imagens'>
-                                    <div className='atual'>
-                                        <img src='/produto-padrao.png' />
-                                    </div>
-                                </div>
-                                <div className='detalhes'>
-                                    <div className='nome'> Nome do Produto top aqui </div>
-                                    <div className='departamento'> Departamento aqui </div>
-
-                                    <div className='preco-label'> PREÇO </div>
-                                    <div className='preco'> R$ 123,45 </div>
-                                </div>
-                            </div>
-                            <div className='qtd-box'>
-                                <div className='qtd'>
-                                    <label>Qtd.</label>
-                                    <select>
-                                        <option>01</option>
-                                        <option>02</option>
-                                        <option>03</option>
-                                        <option>04</option>
-                                        <option>05</option>
-                                    </select>
-                                </div>
-                                <div className='subtotal'>
-                                    <div>Subtotal</div>
-                                    <div>R$ 200,00</div>
-                                </div>
-                                <div className='excluir'>
-                                    excluir
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {itens.map(item => 
+                        <CarrinhoItem
+                            item={item}
+                            removerItem={removerItem}
+                            carregarCarrinho={carregarCarrinho} />
+                    )}
 
                 </div>
 
                 
                 <div className='resumo'>
                     <h1> Subtotal </h1>
-                    <h3> (3 itens) </h3>
-                    <p> R$ 9999,00 </p>
+                    <h3> ({qtdItens()} itens) </h3>
+                    <p> R$ {calcularValorTotal()} </p>
                     <button> Fechar Pedido </button>
                 </div>
 

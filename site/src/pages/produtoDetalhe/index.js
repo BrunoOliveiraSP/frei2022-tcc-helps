@@ -2,6 +2,9 @@ import './index.scss'
 
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import Storage from 'local-storage'
+import { toast } from 'react-toastify'
+
 import { buscarProdutoPorId } from '../../api/produtoAPI';
 import { API_URL } from '../../api/config';
 
@@ -31,6 +34,26 @@ export default function ProdutoDetalhe() {
     }
 
 
+    function adicionarAoCarrinho() {
+        let carrinho = [];
+        if (Storage('carrinho')) {
+            carrinho = Storage('carrinho');
+        }
+
+
+        if (!carrinho.find(item => item.id === id)) {
+            carrinho.push({
+                id: id,
+                qtd: 1
+            })
+
+            Storage('carrinho', carrinho);
+        }
+
+        toast.dark('Produto adicionado ao carrinho!');
+    }
+
+
     useEffect(() => {
         carregarPagina(); 
     }, [])
@@ -57,7 +80,7 @@ export default function ProdutoDetalhe() {
                     <div className='preco-label'> PREÇO </div>
                     <div className='preco'> R$ {produto.info.preco} </div>
                     
-                    <button> Adicionar ao Carrinho </button>
+                    <button onClick={adicionarAoCarrinho}> Adicionar ao Carrinho </button>
                 </div>
                 
             </div>
