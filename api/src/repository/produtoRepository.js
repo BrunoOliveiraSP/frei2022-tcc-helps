@@ -98,8 +98,10 @@ export async function buscarProdutoPorId(id) {
                 nm_produto                      as produto,
                 vl_preco                        as preco,
                 bt_destaque                     as destaque,
-                id_departamento                 as departamento
+                tb_produto.id_departamento      as departamento,
+                nm_departamento                 as nomeDepartamento
         from tb_produto 
+        inner join tb_departamento on tb_departamento.id_departamento = tb_produto.id_departamento
        where id_produto = ?
         `
 

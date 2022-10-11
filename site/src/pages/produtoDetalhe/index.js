@@ -1,8 +1,40 @@
 import './index.scss'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { buscarProdutoPorId } from '../../api/produtoAPI';
+import { API_URL } from '../../api/config';
 
 export default function ProdutoDetalhe() {
+    const [produto, setProduto] = useState({ categorias: [], imagens: [], info: {} })
+    const [imagemPrincipal, setImagemPrincipal] = useState(0);
+
+    const { id } = useParams();
+
+
+    async function carregarPagina() {
+        const r = await buscarProdutoPorId(id);
+        console.log(r);
+        setProduto(r);
+    }
+
+    function exibirImagemPrincipal() {
+        if (produto.imagens.length > 0) {
+            return API_URL + '/' + produto.imagens[imagemPrincipal];
+        }
+        else {
+            return '/produto-padrao.png';
+        }
+    }
+
+    function exibirImagemProduto(imagem) {
+        return API_URL + '/' + imagem;
+    }
+
+
+    useEffect(() => {
+        carregarPagina(); 
+    }, [])
 
 
     return (
@@ -11,20 +43,20 @@ export default function ProdutoDetalhe() {
 
                 <div className='imagens'>
                     <div className='opcoes'>
-                        <img src='/produto-padrao.png' />
-                        <img src='/produto-padrao.png' />
-                        <img src='/produto-padrao.png' />
+                        {produto.imagens.map((item, pos) => 
+                            <img src={exibirImagemProduto(item)} onClick={() => setImagemPrincipal(pos)} />
+                        )}
                     </div>
                     <div className='atual'>
-                        <img src='/produto-padrao.png' />
+                        <img src={exibirImagemPrincipal()} />
                     </div>
                 </div>
                 <div className='detalhes'>
-                    <div className='nome'> Nome do Produto top aqui </div>
-                    <div className='departamento'> Departamento aqui </div>
+                    <div className='nome'> {produto.info.produto} </div>
+                    <div className='departamento'> {produto.info.nomeDepartamento} </div>
                     
                     <div className='preco-label'> PREÇO </div>
-                    <div className='preco'> R$ 123,45 </div>
+                    <div className='preco'> R$ {produto.info.preco} </div>
                     
                     <button> Adicionar ao Carrinho </button>
                 </div>

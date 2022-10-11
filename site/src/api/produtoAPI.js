@@ -11,3 +11,9 @@ export async function listarProdutosInicio() {
     return r.data;
 }
 
+
+export async function buscarProdutoPorId(id) {
+    const r = await api.get('/api/produto/' + id);
+    return r.data;
+}
+
