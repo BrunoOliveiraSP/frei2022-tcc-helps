@@ -1,0 +1,226 @@
+.pagina-pedido {
+    background-color: #f7f7f7;
+    min-height: 100vh;
+    padding: 2em;
+
+    .pedido-box {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        margin-bottom: 20px;
+        h1 {
+            margin: unset
+        }
+    }
+    .finalizar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        color: #4e4e4e;
+
+        div {
+            font-size: 18px;
+            font-weight: 500;
+        }
+        span {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        button {
+            margin: 10px;
+        }
+    }
+    
+    .info {
+        display: flex;
+        background-color: #fff;
+        padding: 1.5em;
+        box-shadow: 0px 0px 10px 2px #e0e0e0;
+        border: 1px solid #e7e7e7;
+    }
+    .info > div:first-child {
+        width: 70%;
+    }
+    .info > div:last-child {
+        width: 30%;
+    }
+    
+
+    h2 {
+        margin-bottom: 20px;
+        color: #4e4e4e;
+    }
+
+    button {
+        margin-top: 20px;
+    }
+
+    .enderecos {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .enderecos > div {
+        margin-top: 10px;
+        margin-right: 10px;
+    }
+    .endereco {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        color: #5e5e5e;
+        border: 1px solid #a3a3a3;
+        border-radius: 5px;
+        padding: 20px;
+        width: 350px;
+        height: 170px;
+    }
+
+    .tipo {
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+    .end,.cep {
+        font-size: 16px;
+    }
+    .cep {
+        margin-top: 10px;
+        font-weight: 500;
+    }
+
+
+
+    .pagamento-box {
+        display: flex;
+        flex-direction: column;
+
+        color: #5e5e5e;
+    }
+
+    .pagamento-box input {
+        border-color: #a3a3a3;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-weight: 700;
+        margin-top: 50px;
+    }
+    th,td {
+        padding: 20px 10px;
+        text-align: center;
+        border-bottom: 1px solid #cfcfcf;
+        color: #767676;
+    }
+    tr th:first-child {
+        text-align: left;
+    }
+    th {
+        font-weight: 500;
+        border-bottom: 1px solid #b4b4b4;
+        color: #9b9b9b;
+    }
+    
+    th:first-child {
+        width: 50%;
+    }
+
+
+
+
+
+
+    .celula-item {
+        display: flex;
+        align-items: center;
+        text-align: left;
+    }
+    .celula-item h3 {
+        margin: 2px 0px;
+        color: #575757;
+    }
+    .celula-item img {
+        height: 100px;
+        margin-right: 15px;
+    }
+    .celula-item h4 {
+        color: #808080;
+        font-weight: 500;
+    }
+
+
+
+    .form > div label {
+        min-width: 4em;
+    }
+    
+
+    @media (max-width: 1280px) {
+        .info > div:first-child {
+            width: 50%;
+        }
+        .info > div:last-child {
+            width: 50%;
+        }
+        
+    }  
+
+
+    @media (max-width: 768px) {
+        .info {
+            flex-direction: column;
+        }
+        .info > div {
+            width: 100% !important;
+        }
+        .endereco {
+            width: 100%;
+        }
+        .enderecos > div {
+            margin-right: unset;
+        }
+
+        .pagamento-box {
+            margin-top: 50px;
+        }
+
+        .itens {
+            overflow-x: scroll;
+        }
+        table {
+            min-width: 700px;
+        }
+
+        .form {
+            max-width: 768px;
+        }    
+    }
+
+
+    @media (max-width: 600px) {
+        .pedido-box {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+
+    @media (max-width: 425px) {
+        padding: 1em;
+        
+        .finalizar {
+            flex-direction: column;
+        }
+        .pedido-box {
+            button {
+                margin: 10px 0px;
+            }
+        }
+        .form > div label {
+            min-width: auto;
+        }
+    }
+
+}

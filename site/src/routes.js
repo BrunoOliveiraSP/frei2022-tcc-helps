@@ -8,7 +8,9 @@ import Produto from './pages/admin/produto'
 import ConsultarProduto from './pages/admin/consultarProduto'
 
 import LoginCli from './pages/login'
-
+import ProdutoDetalhe from './pages/produtoDetalhe';
+import Carrinho from './pages/carrinho';
+import Pedido from './pages/pedido';
 
 export default function AppRoutes() {
     return (
@@ -16,6 +18,10 @@ export default function AppRoutes() {
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/login' element={<LoginCli />} />
+                <Route path='/produto/:id/detalhe' element={<ProdutoDetalhe />} />
+                <Route path='/carrinho' element={<Carrinho />} />
+                <Route path='/pedido' element={<Pedido />} />
+                
                 
                 <Route path='/admin' element={<AdminHome />} />
                 <Route path='/admin/login' element={<Login />} />

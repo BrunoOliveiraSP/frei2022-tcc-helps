@@ -1,0 +1,93 @@
+.pagina-detalhe-produto {
+    background-color: #f7f7f7;
+    min-height: 100vh;
+    padding: .5em;
+
+
+    .produto {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        padding: 1.5em;
+        background-color: #fff;
+        box-shadow: 0px 0px 10px 2px #e0e0e0;
+    }
+
+
+    .imagens {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .opcoes {
+            display: flex;
+            flex-direction: column;
+
+            margin: 30px;
+
+            img {
+                width: 60px;
+                margin: 10px;
+            }
+        }
+
+        .atual img {
+            width: 300px;
+        }
+    }
+
+    .detalhes {
+        margin-left: 150px;
+
+        .nome {
+            font-size: 32px;
+            font-weight: 500;
+        }
+
+        .departamento {
+            font-size: 20px;
+        }
+
+        .preco-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-top: 20px;
+        }
+
+        .preco {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        button {
+            margin-top: 20px;
+        }
+    }
+
+
+    @media (max-width: 1024px) {
+        .produto {
+            flex-direction: column-reverse;
+            align-items: flex-start;
+        }
+
+        .detalhes {
+            margin-left: 0px;
+        }
+
+        .imagens {
+            flex-direction: column-reverse;
+            margin-top: 50px;
+
+            .opcoes {
+                flex-direction: row;
+                margin: 0px;
+            }
+        }
+
+    }
+
+
+}
