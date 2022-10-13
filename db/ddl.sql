@@ -63,3 +63,19 @@ create table tb_login_usuario (
 
 
 
+
+create table tb_usuario_endereco (
+	id_usuario_endereco			int primary key auto_increment,
+	id_usuario					int,
+    ds_cep						varchar(50),
+    ds_logradouro				varchar(400),
+    ds_bairro					varchar(100),
+    ds_cidade					varchar(100),
+    ds_estado					varchar(100),
+    ds_numero					varchar(100),
+    ds_complemento				varchar(200),
+    foreign key (id_usuario) references tb_usuario (id_usuario)
+);
+
+
+

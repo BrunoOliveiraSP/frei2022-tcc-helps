@@ -1,13 +1,22 @@
 import './index.scss'
-
 import { useState } from 'react'
+import ModalEndereco from '../../components/modalEndereco'
+
+
+
+
 
 export default function Pedido() {
 
 
+
+
+
     return (
         <div className='pagina-pedido'>
+            <ModalEndereco exibir={false} />
 
+            
             <div className='pedido-box'>
                 <h1> Pedido </h1>
                 <div className='finalizar'>
@@ -15,6 +24,7 @@ export default function Pedido() {
                     <button> Finalizar Pedido </button>
                 </div>
             </div>
+
 
             <div className='info'>
                 <div>
