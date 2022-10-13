@@ -6,7 +6,7 @@ import adminProdutoController from './controller/admin/produtoController.js'
 
 import loginClienteController from './controller/loginClienteController.js'
 import produtoController from './controller/produtoController.js'
-
+import enderecoController from './controller/enderecoController.js'
 
 import express from "express";
 import cors from "cors";
@@ -23,6 +23,7 @@ server.use(adminProdutoController);
 
 server.use(loginClienteController);
 server.use(produtoController);
+server.use(enderecoController);
 
 
 server.use('/storage/produto', express.static('storage/produto'));

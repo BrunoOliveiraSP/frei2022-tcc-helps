@@ -1,20 +1,43 @@
 import './index.scss'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ModalEndereco from '../../components/modalEndereco'
+import Storage from  'local-storage'
 
+import { listar } from '../../api/enderecoAPI'
+import CardEndereco from '../../components/cardEndereco';
 
 
 
 
 export default function Pedido() {
+    const [enderecos, setEnderecos] = useState([]);
+    const [exibirEndereco, setExibirEndereco] = useState(false);
 
 
+    async function carregarEnderecos() {
+        const id = Storage('cliente-logado').id;
+        const r = await listar(id);
+        setEnderecos(r);
+    }
+
+    function exibirNovoEndereco() {
+        setExibirEndereco(true);
+    }
+
+    function fecharNovoEndereco() {
+        setExibirEndereco(false);
+        carregarEnderecos();
+    }
+
+    useEffect(() => {
+        carregarEnderecos();
+    }, [])
 
 
 
     return (
         <div className='pagina-pedido'>
-            <ModalEndereco exibir={false} />
+            <ModalEndereco exibir={exibirEndereco} fechar={fecharNovoEndereco} />
 
             
             <div className='pedido-box'>
@@ -32,24 +55,12 @@ export default function Pedido() {
 
                     <div className='enderecos'>
 
-                        <div className='endereco'>
-                            <div className='tipo'>CASA</div>
-                            <div>
-                                <div className='end'>Av. Interlagos Interlagos Interlagos Interlagos, 333 - pontoasdfasdfa sdfasdfasfa</div>
-                                <div className='cep'>04455-444 - São Paulo/SP</div>
-                            </div>
-                        </div>
-                        <div className='endereco'>
-                            <div className='tipo'>CASA</div>
-                            <div>
-                                <div className='end'>Av. Interlagos Interlagos Interlagos Interlagos, 333 - pontoasdfasdfa sdfasdfasfa</div>
-                                <div className='cep'>04455-444 - São Paulo/SP</div>
-                            </div>
-                        </div>
-
+                        {enderecos.map(item =>
+                            <CardEndereco item={item} />
+                        )}
                     </div>
 
-                    <button> Novo </button>
+                    <button onClick={exibirNovoEndereco}> Novo </button>
 
                 </div>
 
