@@ -4,6 +4,11 @@
     background-color: #f7f7f7;
     min-height: 100vh;
 
+    .cabecalho {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
     .produtos-container {
         display: flex;

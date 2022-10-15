@@ -4,9 +4,17 @@ import { useEffect, useState } from 'react'
 import Storage from 'local-storage'
 import { buscarProdutoPorId } from '../../api/produtoAPI';
 import CarrinhoItem from '../../components/carrinhoItem';
+import { useNavigate } from 'react-router-dom';
 
 export default function Carrinho() {
     const [itens, setItens] = useState([]);
+
+
+    const navigate = useNavigate();
+
+    function irPedido() {
+        navigate('/pedido')
+    }
 
 
 
@@ -80,7 +88,7 @@ export default function Carrinho() {
                     <h1> Subtotal </h1>
                     <h3> ({qtdItens()} itens) </h3>
                     <p> R$ {calcularValorTotal()} </p>
-                    <button> Fechar Pedido </button>
+                    <button onClick={irPedido}> Fechar Pedido </button>
                 </div>
 
 

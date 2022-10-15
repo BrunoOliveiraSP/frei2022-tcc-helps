@@ -129,9 +129,18 @@
     }
 
 
+    .info-extra {
+        display: flex;
+        max-width: 500px;
+    }
+    .info-extra .form > div label {
+        min-width: 4em;
+    }
+
+
 
     .form > div label {
-        min-width: 4em;
+        min-width: 7em;
     }
     
 
