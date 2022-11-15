@@ -177,13 +177,13 @@ export async function removerProduto(idProduto) {
 
 
 
-export async function removerProdutoImagensDiferentesDe(imagens) {
+export async function removerProdutoImagensDiferentesDe(id, imagens) {
     const comando = `
         delete from tb_produto_imagem 
-              where ds_imagem NOT IN (?)
+              where ds_imagem NOT IN (?) AND id_produto = ?
     `
 
-    const [resp] = await con.query(comando, [imagens])
+    const [resp] = await con.query(comando, [imagens, id])
     return resp.affectedRows;
 }
 

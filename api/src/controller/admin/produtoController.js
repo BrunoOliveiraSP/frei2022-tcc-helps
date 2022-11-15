@@ -49,7 +49,7 @@ server.put('/admin/produto/:id/imagem', upload.array('imagens'), async (req, res
 
 
         if (imagensPermancem.length > 0)
-            await removerProdutoImagensDiferentesDe(imagensPermancem);
+            await removerProdutoImagensDiferentesDe(id, imagensPermancem);
         else
             await removerProdutoImagens(id);
 
